@@ -28,7 +28,7 @@
 .mb-setup button{padding:9px 14px;border-radius:6px;border:1px solid #2c5ba9;background:#2c5ba9;color:#fff;font:inherit;cursor:pointer}.mb-setup button.g{background:#fff;color:#2c5ba9}
 .mb-setup p{margin:0;font-size:13px;color:#5d6470}.mb-setup .err{color:#d9402a}</style>
 <form>
-<h2>Memorii Brisk – configurare</h2>
+<h2>Memorii tehnice – configurare</h2>
 <p>Se face o singură dată pe fiecare calculator. Datele se salvează în baza Supabase a echipei; codul echipei îl trimiți colegilor.</p>
 <label>URL Supabase<input name="url" placeholder="https://xxxx.supabase.co" value="${cfg.url || ''}" ${base.url ? 'readonly' : ''}></label>
 <label>Cheia publică (anon) Supabase<input name="key" value="${cfg.key || ''}" ${base.key ? 'readonly' : ''}></label>
@@ -46,7 +46,7 @@
       const c = d.querySelector('[data-cancel]'); if (c) c.onclick = () => { d.remove(); resolve(false); };
       f.onsubmit = async e => {
         e.preventDefault();
-        const n = { url: f.url.value.trim().replace(/\/$/, ''), key: f.key.value.trim(), ws: f.ws.value.trim(), ai: f.ai.value.trim(), model: f.model.value.trim() || 'claude-sonnet-5-5' };
+        const n = { url: f.url.value.trim().replace(/\/+$/, '').replace(/\/rest\/v1$/i, '').replace(/\/+$/, ''), key: f.key.value.trim(), ws: f.ws.value.trim(), ai: f.ai.value.trim(), model: f.model.value.trim() || 'claude-sonnet-5-5' };
         const er = d.querySelector('.err');
         if (!n.url || !n.key || n.ws.length < 20) { er.hidden = false; er.textContent = 'Completează URL-ul, cheia și un cod de echipă de minimum 20 de caractere.'; return; }
         cfg = { ...base, ...n };
